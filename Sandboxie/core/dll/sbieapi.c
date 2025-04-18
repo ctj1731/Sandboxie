@@ -181,6 +181,8 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
                 SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
                 API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
         }
+        parms[2].expired = 0;
+        parms[2].expirers_in_sec = 0xffffffff;
 
     }
 
