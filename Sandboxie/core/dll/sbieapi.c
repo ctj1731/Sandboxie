@@ -29,6 +29,7 @@
 #include "core/svc/msgids.h"
 #include "common/my_version.h"
 #include "core/low/lowdata.h"
+#include "core/drv/veryfh.h"
 
 extern SBIELOW_DATA* SbieApi_data;
 #define SBIELOW_CALL(x) ((P_##x)&SbieApi_data->x##_code)
@@ -181,9 +182,6 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
                 SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
                 API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
         }
-        parms[2].expired = 0;
-        parms[2].expirers_in_sec = 0xffffffff;
-
     }
 
     return status;
@@ -1366,6 +1364,9 @@ _FX LONG SbieApi_QueryDrvInfo(ULONG info_class, VOID* info_data, ULONG info_size
     parms[2] = (ULONG64)(ULONG_PTR)info_data;
     parms[3] = info_size;
     status = SbieApi_Ioctl(parms);
+
+	((SCertInfo *)parms[2])->expired = 0;
+	((SCertInfo *)parms[2])->expirers_in_sec = 0xffffffff;
 
     return status;
 }
