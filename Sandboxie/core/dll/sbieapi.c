@@ -29,7 +29,7 @@
 #include "core/svc/msgids.h"
 #include "common/my_version.h"
 #include "core/low/lowdata.h"
-#include "core/drv/veryfh.h"
+#include "core/drv/verify.h"
 
 extern SBIELOW_DATA* SbieApi_data;
 #define SBIELOW_CALL(x) ((P_##x)&SbieApi_data->x##_code)
