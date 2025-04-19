@@ -3131,6 +3131,9 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 
 	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
 
+	g_CertInfo.expired = 0;
+	g_CertInfo.expirers_in_sec = 0xffffffff;
+
 	if (!Status.IsError())
 	{
 		BYTE CertBlocked = 0;
