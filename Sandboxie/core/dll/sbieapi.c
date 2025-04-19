@@ -1363,6 +1363,10 @@ _FX LONG SbieApi_QueryDrvInfo(ULONG info_class, VOID* info_data, ULONG info_size
     parms[1] = info_class;
     parms[2] = (ULONG64)(ULONG_PTR)info_data;
     parms[3] = info_size;
+
+    ((SCertInfo *)parms[2])->expired = 0;
+	((SCertInfo *)parms[2])->expirers_in_sec = 0xffffffff;
+
     status = SbieApi_Ioctl(parms);
 
 	((SCertInfo *)parms[2])->expired = 0;
